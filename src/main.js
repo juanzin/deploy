@@ -1,5 +1,6 @@
-function init() {
-    console.log("init class");
-}
+const suma = require("./suma");
 
-init();
+var sum = new suma();
+var result = sum.sumar();
+
+console.log(result);
