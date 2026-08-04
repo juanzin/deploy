@@ -1,8 +1,8 @@
 class suma {
 
-    sumar() {
+    sumar(number1, number2) {
 
-        return 5 + 6;
+        return number1 + number2;
     }
 }
 

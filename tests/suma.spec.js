@@ -1,5 +1,5 @@
 // suma.test.js
-const suma = Object.assign(require('./suma'));
+const suma = Object.assign(require('../src/suma'));
 
 describe('Pruebas para la clase Calculadora', () => {
   let calc;
@@ -7,7 +7,7 @@ describe('Pruebas para la clase Calculadora', () => {
   // `beforeEach` se ejecuta antes de CADA prueba
   // Garantiza que cada test tenga una instancia limpia
   beforeEach(() => {
-    calc = new Calculadora();
+    calc = new suma();
   });
 
   // `test` (o `it`) define un caso de prueba individual
