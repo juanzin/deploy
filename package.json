@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "vite build"
   },
   "devDependencies": {
     "jest": "^30.4.2"
