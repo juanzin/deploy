@@ -4,6 +4,7 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "jest": "^30.4.2"
+    "jest": "^30.4.2",
+    "vite": "^7.0.0"
   }
 }
