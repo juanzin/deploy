@@ -8,3 +8,8 @@ npm install --save-dev jest
 
 run tests:
 npm test
+
+
+ejecutar el workflow manualmente:
+
+gh workflow run ci-cd.yml --ref release
