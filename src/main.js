@@ -5,4 +5,4 @@ const suma = require("./suma");
 var sum = new suma();
 var result = sum.sumar(2,3);
 
-console.log(result);
+// console.log(result);
