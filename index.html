@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Animado con Carta</title>
+  <style>
+    body {
+      background-color: #f0f3f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Contenedor del sobre */
+    .contenedor-sobre {
+      position: relative;
+      width: 240px;
+      height: 150px;
+      cursor: pointer;
+    }
+
+    /* Fondo base del sobre */
+    .sobre {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #e0e0e0;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* La Hoja/Carta interior */
+    .carta {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      width: 210px;
+      height: 130px;
+      background-color: #ffffff;
+      border-radius: 6px;
+      padding: 15px;
+      box-sizing: border-box;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      
+      /* Animación de la carta subiendo */
+      transition: transform 0.5s ease-in-out 0.4s, z-index 0s linear 0.4s;
+      z-index: 2;
+    }
+
+    .carta h4 {
+      margin: 0 0 5px 0;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .carta p {
+      margin: 0;
+      color: #666;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* Cuerpos del sobre por encima de la carta para dar el efecto de bolsillo */
+    .cuerpo-inferior {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 120px solid #f5f5f5;
+      border-right: 120px solid #f5f5f5;
+      border-top: 75px solid transparent;
+      border-bottom: 75px solid #ececec;
+      border-radius: 0 0 10px 10px;
+      z-index: 3;
+    }
+
+    /* Solapa superior interactiva con efecto 3D */
+    .solapa {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 120px solid transparent;
+      border-right: 120px solid transparent;
+      border-top: 85px solid #d4d4d4;
+      
+      /* Ajustes para rotación 3D */
+      transform-origin: top;
+      transition: transform 0.4s ease-in-out, z-index 0.2s;
+      z-index: 4;
+    }
+
+    /* --- ANIMACIÓN AL PASAR EL CURSOR (HOVER) --- */
+
+    /* 1. La solapa se abre hacia arriba (rota 180 deg) y pasa atrás */
+    .contenedor-sobre:hover .solapa {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    /* 2. La carta se desliza hacia arriba y sube en la capa Z */
+    .contenedor-sobre:hover .carta {
+      transform: translateY(-80px);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor-sobre">
+    <div class="sobre"></div>
+    
+    <div class="carta">
+      <h4>¡Hola! 👋</h4>
+      <p>Este es el contenido de tu carta personalizada usando HTML y CSS puro.</p>
+    </div>
+
+    <div class="cuerpo-inferior"></div>
+    <div class="solapa"></div>
+  </div>
+
+</body>
+</html>
