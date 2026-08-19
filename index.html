@@ -2,128 +2,308 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre Animado con Carta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Carta Romántica Interactiva</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent; /* Quita el cuadro al tocar en celulares */
+    }
+
     body {
-      background-color: #f0f3f8;
+      background: radial-gradient(circle at center, #ffebee, #f8bbd0, #f48fb1);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 20px 10px; /* Espacio de seguridad para pantallas pequeñas */
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden; /* Evita desplazamientos horizontales */
+      position: relative;
     }
 
-    /* Contenedor del sobre */
+    /* --- Fondo de Pétalos Cayendo --- */
+    .petalo {
+      position: absolute;
+      top: -10%;
+      background: linear-gradient(135deg, #ff4081, #d81b60);
+      border-radius: 15px 0 15px 0;
+      opacity: 0.7;
+      pointer-events: none;
+      animation: caer 10s linear infinite;
+    }
+
+    @keyframes caer {
+      0% {
+        transform: translateY(0) rotate(0deg) translateX(0);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(50vh) rotate(180deg) translateX(40px);
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg) translateX(-20px);
+        opacity: 0.2;
+      }
+    }
+
+    /* --- Contenedor Principal del Sobre --- */
     .contenedor-sobre {
       position: relative;
-      width: 240px;
-      height: 150px;
-      cursor: pointer;
+      width: 280px; /* Adaptado para celulares */
+      height: 180px;
+      z-index: 10;
+      perspective: 1000px;
+      margin-top: 80px; /* Espacio superior suficiente cuando suba la carta */
+      margin-bottom: 50px;
     }
 
-    /* Fondo base del sobre */
-    .sobre {
+    /* Base del Sobre */
+    .sobre-base {
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: #e0e0e0;
-      border-radius: 0 0 10px 10px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(145deg, #8e0000, #b71c1c);
+      border-radius: 12px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
     }
 
-    /* La Hoja/Carta interior */
+    /* --- Hoja de la Carta --- */
     .carta {
       position: absolute;
       bottom: 10px;
-      left: 15px;
-      width: 210px;
-      height: 130px;
-      background-color: #ffffff;
-      border-radius: 6px;
-      padding: 15px;
-      box-sizing: border-box;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      left: 12px;
+      width: 256px;
+      height: 160px;
+      background: #fdf5e6;
+      background-image: radial-gradient(#edd6b1 1px, transparent 1px);
+      background-size: 10px 10px;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      border: 2px dashed #d7ccc8;
       
-      /* Animación de la carta subiendo */
-      transition: transform 0.5s ease-in-out 0.4s, z-index 0s linear 0.4s;
+      /* Transición suave */
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.35s, z-index 0s linear 0.35s;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
     }
 
-    .carta h4 {
-      margin: 0 0 5px 0;
-      color: #333;
-      font-size: 14px;
+    .carta h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      color: #5d4037;
+      margin: 0 0 4px 0;
     }
 
     .carta p {
+      font-family: 'Dancing Script', cursive;
+      font-size: 17px;
+      color: #6d4c41;
       margin: 0;
-      color: #666;
-      font-size: 11px;
-      line-height: 1.4;
+      line-height: 1.3;
     }
 
-    /* Cuerpos del sobre por encima de la carta para dar el efecto de bolsillo */
+    .carta .firma {
+      font-size: 15px;
+      color: #8d6e63;
+      margin-top: 6px;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    /* --- Cuerpos Frontales del Sobre --- */
     .cuerpo-inferior {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 0;
       height: 0;
-      border-left: 120px solid #f5f5f5;
-      border-right: 120px solid #f5f5f5;
-      border-top: 75px solid transparent;
-      border-bottom: 75px solid #ececec;
-      border-radius: 0 0 10px 10px;
+      border-left: 140px solid #d32f2f;
+      border-right: 140px solid #d32f2f;
+      border-top: 85px solid transparent;
+      border-bottom: 95px solid #c62828;
+      border-radius: 0 0 12px 12px;
       z-index: 3;
+      filter: drop-shadow(0 -2px 3px rgba(0,0,0,0.1));
     }
 
-    /* Solapa superior interactiva con efecto 3D */
+    .estampilla {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 35px;
+      height: 42px;
+      background: #fff;
+      border: 2px dashed #b71c1c;
+      border-radius: 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      transform: rotate(5deg);
+      z-index: 4;
+    }
+
+    /* --- Solapa Superior --- */
     .solapa {
       position: absolute;
       top: 0;
       left: 0;
       width: 0;
       height: 0;
-      border-left: 120px solid transparent;
-      border-right: 120px solid transparent;
-      border-top: 85px solid #d4d4d4;
+      border-left: 140px solid transparent;
+      border-right: 140px solid transparent;
+      border-top: 100px solid #b71c1c;
       
-      /* Ajustes para rotación 3D */
       transform-origin: top;
-      transition: transform 0.4s ease-in-out, z-index 0.2s;
-      z-index: 4;
+      transition: transform 0.5s ease-in-out, z-index 0.2s;
+      z-index: 5;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2));
     }
 
-    /* --- ANIMACIÓN AL PASAR EL CURSOR (HOVER) --- */
+    .sello-cera {
+      position: absolute;
+      top: -25px;
+      left: -18px;
+      width: 36px;
+      height: 36px;
+      background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+      border-radius: 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(255, 255, 255, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      color: #5c3d00;
+      border: 2px solid #daa520;
+    }
 
-    /* 1. La solapa se abre hacia arriba (rota 180 deg) y pasa atrás */
-    .contenedor-sobre:hover .solapa {
+    /* --- ESTADO ABIERTO --- */
+    .contenedor-sobre.abierto .solapa {
       transform: rotateX(180deg);
       z-index: 1;
     }
 
-    /* 2. La carta se desliza hacia arriba y sube en la capa Z */
-    .contenedor-sobre:hover .carta {
-      transform: translateY(-80px);
-      z-index: 5;
+    .contenedor-sobre.abierto .carta {
+      transform: translateY(-110px);
+      z-index: 6;
+    }
+
+    /* --- Botón en Forma de Corazón --- */
+    .boton-corazon {
+      position: relative;
+      background-color: #e91e63;
+      width: 70px; /* Ligeramente más grande para dar cabida al texto */
+      height: 70px;
+      border: none;
+      cursor: pointer;
+      transform: rotate(-45deg);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      box-shadow: -3px 3px 12px rgba(0,0,0,0.25);
+      z-index: 20;
+      margin-top: 20px;
+      touch-action: manipulation;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .boton-corazon::before,
+    .boton-corazon::after {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      background-color: #e91e63;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+
+    .boton-corazon::before {
+      top: -35px;
+      left: 0;
+    }
+
+    .boton-corazon::after {
+      left: 35px;
+      top: 0;
+    }
+
+    /* Texto "Tócame" dentro del corazón */
+    .texto-corazon {
+      position: relative;
+      z-index: 25;
+      transform: rotate(45deg); /* Compensa la rotación del corazón para verse derecho */
+      color: #ffffff;
+      font-family: 'Dancing Script', cursive;
+      font-size: 25px;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    /* Efectos al tocar/presionar */
+    .boton-corazon:hover,
+    .boton-corazon:hover::before,
+    .boton-corazon:hover::after {
+      background-color: #d81b60;
+    }
+
+    .boton-corazon:active {
+      transform: rotate(-45deg) scale(0.92);
     }
   </style>
 </head>
 <body>
 
-  <div class="contenedor-sobre">
-    <div class="sobre"></div>
+  <div class="petalo" style="left: 8%; width: 15px; height: 15px; animation-duration: 8s; animation-delay: 0s;"></div>
+  <div class="petalo" style="left: 25%; width: 20px; height: 20px; animation-duration: 11s; animation-delay: 2s;"></div>
+  <div class="petalo" style="left: 48%; width: 16px; height: 16px; animation-duration: 9s; animation-delay: 4s;"></div>
+  <div class="petalo" style="left: 70%; width: 22px; height: 22px; animation-duration: 12s; animation-delay: 1s;"></div>
+  <div class="petalo" style="left: 88%; width: 15px; height: 15px; animation-duration: 10s; animation-delay: 3s;"></div>
+
+  <div class="contenedor-sobre" id="sobre">
+    <div class="sobre-base"></div>
     
     <div class="carta">
-      <h4>¡Hola! 👋</h4>
-      <p>Este es el contenido de tu carta personalizada usando HTML y CSS puro.</p>
+      <h3>Para la niña más linda ❤️</h3>
+      <p>Quería decirte de una forma especial que me gustas mucho. Cada detalle tuyo ilumina mi día.</p>
+      <span class="firma">Con todo mi cariño ✨</span>
     </div>
 
     <div class="cuerpo-inferior"></div>
-    <div class="solapa"></div>
+    <div class="estampilla">💌</div>
+
+    <div class="solapa">
+      <div class="sello-cera">💖</div>
+    </div>
   </div>
+
+  <button class="boton-corazon" id="btnAbrir" aria-label="Abrir carta">
+    <span class="texto-corazon">Tócame</span>
+  </button>
+
+  <script>
+    const sobre = document.getElementById('sobre');
+    const btnAbrir = document.getElementById('btnAbrir');
+
+    btnAbrir.addEventListener('click', () => {
+      sobre.classList.toggle('abierto');
+    });
+  </script>
 
 </body>
 </html>
