@@ -12,7 +12,7 @@
   <style>
     * {
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent; /* Quita el cuadro al tocar en celulares */
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -23,9 +23,9 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      padding: 20px 10px; /* Espacio de seguridad para pantallas pequeñas */
+      padding: 20px 10px;
       font-family: 'Poppins', sans-serif;
-      overflow-x: hidden; /* Evita desplazamientos horizontales */
+      overflow-x: hidden;
       position: relative;
     }
 
@@ -57,11 +57,11 @@
     /* --- Contenedor Principal del Sobre --- */
     .contenedor-sobre {
       position: relative;
-      width: 280px; /* Adaptado para celulares */
+      width: 280px;
       height: 180px;
       z-index: 10;
       perspective: 1000px;
-      margin-top: 80px; /* Espacio superior suficiente cuando suba la carta */
+      margin-top: 80px;
       margin-bottom: 50px;
     }
 
@@ -91,7 +91,6 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
       border: 2px dashed #d7ccc8;
       
-      /* Transición suave */
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.35s, z-index 0s linear 0.35s;
       z-index: 2;
       display: flex;
@@ -205,7 +204,7 @@
     .boton-corazon {
       position: relative;
       background-color: #e91e63;
-      width: 70px; /* Ligeramente más grande para dar cabida al texto */
+      width: 70px;
       height: 70px;
       border: none;
       cursor: pointer;
@@ -215,9 +214,6 @@
       z-index: 20;
       margin-top: 20px;
       touch-action: manipulation;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .boton-corazon::before,
@@ -241,11 +237,16 @@
       top: 0;
     }
 
-    /* Texto "Tócame" dentro del corazón */
+    /* --- Centrado Óptico Exacto del Texto --- */
     .texto-corazon {
-      position: relative;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* Rotamos 45deg para enderezar el texto y lo desplazamos hacia el centro visual del corazón */
+      transform: translate(-50%, -50%) rotate(45deg);
+      margin-top: -10px;  /* Sube sutilmente el texto para compensar las orejas del corazón */
+      margin-left: 10px;  /* Ajuste de precisión horizontal */
       z-index: 25;
-      transform: rotate(45deg); /* Compensa la rotación del corazón para verse derecho */
       color: #ffffff;
       font-family: 'Dancing Script', cursive;
       font-size: 25px;
@@ -253,6 +254,7 @@
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       white-space: nowrap;
       user-select: none;
+      pointer-events: none; /* Permite que el toque pase directamente al botón */
     }
 
     /* Efectos al tocar/presionar */
